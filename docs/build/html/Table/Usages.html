@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Usages &mdash; GAN-MAT 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Output" href="Output.html" />
+    <link rel="prev" title="Installation" href="installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> GAN-MAT
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Usages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#structure-of-our-program">Structure of our program</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#command">Command</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Output.html">Output</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">GAN-MAT</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">Usages</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/CAMIN-neuro/GAN-MAT/blob/main/docs/source/Table/Usages.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="usages">
+<h1>Usages<a class="headerlink" href="#usages" title="Permalink to this heading"></a></h1>
+<section id="structure-of-our-program">
+<h2>Structure of our program<a class="headerlink" href="#structure-of-our-program" title="Permalink to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>GAN-MAT
+├── functions
+│   └── model
+├── parcellations
+├── template
+├── gan-mat
+└── folder_setting.ipynb
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>functions</strong>: a folder containing files for processing data, especially <em>model</em> floder related to synthesizing T2-weighted MRI.</p></li>
+<li><p><strong>parcellations</strong>: a floder containing <em>.annot</em> files of each atlas</p></li>
+<li><p><strong>template</strong>: a floder containing MRI image for registration.</p></li>
+<li><p><strong>gan-mat</strong>: main shell script to run program</p></li>
+<li><p><strong>folder_setting.ipynb</strong>: a file that converts input data to specific format</p></li>
+</ul>
+</section>
+<section id="command">
+<h2>Command<a class="headerlink" href="#command" title="Permalink to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>Using <em>folder_setting.ipynb</em> file, transform input data to specific format.</p></li>
+<li><p>run <em>gan-mat</em>.</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gan</span><span class="o">-</span><span class="n">mat</span> <span class="o">-</span><span class="n">input_dir</span> <span class="s2">&quot;your input data folder path&quot;</span> <span class="o">-</span><span class="n">output_dir</span> <span class="s2">&quot;your output data folder path&quot;</span> <span class="o">&lt;</span><span class="n">options</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 80%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>Options</strong></p></td>
+<td><p><strong>Description</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>batch_size &lt;num&gt;</p></td>
+<td><p>Synthesizing T2-weight MRI, Number of batch size (default is 1).</p></td>
+</tr>
+<tr class="row-odd"><td><p>threads &lt;num&gt;</p></td>
+<td><p>default is 6</p></td>
+</tr>
+<tr class="row-even"><td><p>T2</p></td>
+<td><p>run to making T2-weight MRI and terminate the program.</p></td>
+</tr>
+<tr class="row-odd"><td><p>myelin</p></td>
+<td><p>run to making T1/T2 ratio and terminate the program.</p></td>
+</tr>
+<tr class="row-even"><td><p>matrix</p></td>
+<td><p>run to making MPC matrix and terminate the program.</p></td>
+</tr>
+<tr class="row-odd"><td><p>gradients</p></td>
+<td><p>run to making MPC matrix and terminate the program.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>When batch size is 1, in out experiments, it required approximately as much GPU memory as 10GB. So if you have GPU but the capacity is not enough, device variable in <em>functions/model/t2.py</em> changes to cpu</p>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>The Results are stored in each subject folders of output_dir path.</p></li>
+</ol>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Output.html" class="btn btn-neutral float-right" title="Output" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, CAMIN.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

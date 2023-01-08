@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MAIN OUTPUTS &mdash; GAN-MAT 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="REFERENCES &amp; ACKNOWLEDGMENTS" href="REFERENCES%20%26%20ACKNOWLEDGMENTS.html" />
+    <link rel="prev" title="USAGE NOTES" href="USAGE%20NOTES.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> GAN-MAT
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="INSTALLATION.html">INSTALLATION</a></li>
+<li class="toctree-l1"><a class="reference internal" href="USAGE%20NOTES.html">USAGE NOTES</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">MAIN OUTPUTS</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#main-output-files">Main output files</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#output-data-structure">Output data structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#synthesized-t2-weighted-mri">Synthesized T2-weighted MRI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#synthesized-mpc-matrix">Synthesized MPC matrix</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#synthesized-microstructural-gradient">Synthesized microstructural gradient</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="REFERENCES%20%26%20ACKNOWLEDGMENTS.html">REFERENCES &amp; ACKNOWLEDGMENTS</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">GAN-MAT</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">MAIN OUTPUTS</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/CAMIN-neuro/GAN-MAT/blob/main/docs/source/Table/MAIN OUTPUTS.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="main-outputs">
+<h1>MAIN OUTPUTS<a class="headerlink" href="#main-outputs" title="Permalink to this heading"></a></h1>
+<section id="main-output-files">
+<h2>Main output files<a class="headerlink" href="#main-output-files" title="Permalink to this heading"></a></h2>
+<section id="output-data-structure">
+<h3>Output data structure<a class="headerlink" href="#output-data-structure" title="Permalink to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>output_dir
+├── 105923                                   # Subject ID
+│   ├── T2w.nii.gz                           # Synthesized T2-weighted MRI
+│   ├── myelin.nii.gz                        # Synthesized myelin-sensitive proxy
+│   ├── schaefer-100_MPC_matrix.txt          # MPC matrix with schaefer-100 atlas
+│   ├── schaefer-200_MPC_matrix.txt          # MPC matrix with schaefer-200 atlas
+│   ├── schaefer-300_MPC_matrix.txt          # MPC matrix with schaefer-300 atlas
+│   ├── schaefer-400_MPC_matrix.txt          # MPC matrix with schaefer-400 atlas
+│   ├── schaefer-500_MPC_matrix.txt          # MPC matrix with schaefer-500 atlas
+│   ├── schaefer-600_MPC_matrix.txt          # MPC matrix with schaefer-600 atlas
+│   ├── schaefer-700_MPC_matrix.txt          # MPC matrix with schaefer-700 atlas
+│   ├── schaefer-800_MPC_matrix.txt          # MPC matrix with schaefer-800 atlas
+│   ├── schaefer-900_MPC_matrix.txt          # MPC matrix with schaefer-900 atlas
+│   ├── schaefer-1000_MPC_matrix.txt         # MPC matrix with schaefer-1000 atlas
+│   ├── vosdewael-100_MPC_matrix.txt         # MPC matrix with vosdewael-100 atlas
+│   ├── vosdewael-200_MPC_matrix.txt         # MPC matrix with vosdewael-200 atlas
+│   ├── vosdewael-300_MPC_matrix.txt         # MPC matrix with vosdewael-300 atlas
+│   ├── vosdewael-400_MPC_matrix.txt         # MPC matrix with vosdewael-400 atlas
+│   ├── aparc_MPC_matrix.txt                 # MPC matrix with aparc atlas
+│   ├── aparc-a2009s_MPC_matrix.txt          # MPC matrix with aparc-a2009s atlas
+│   ├── economo_MPC_matrix.txt               # MPC matrix with economo atlas
+│   ├── glasser-360_MPC_matrix.txt           # MPC matrix with glasser-360 atlas
+│   ├── schaefer-100_MPC_gradients.txt       # Microstructural gradient with schaefer-100 atlas
+│   ├── schaefer-200_MPC_gradients.txt       # Microstructural gradient with schaefer-200 atlas
+│   ├── schaefer-300_MPC_gradients.txt       # Microstructural gradient with schaefer-300 atlas
+│   ├── schaefer-400_MPC_gradients.txt       # Microstructural gradient with schaefer-400 atlas
+│   ├── schaefer-500_MPC_gradients.txt       # Microstructural gradient with schaefer-500 atlas
+│   ├── schaefer-600_MPC_gradients.txt       # Microstructural gradient with schaefer-600 atlas
+│   ├── schaefer-700_MPC_gradients.txt       # Microstructural gradient with schaefer-700 atlas
+│   ├── schaefer-800_MPC_gradients.txt       # Microstructural gradient with schaefer-800 atlas
+│   ├── schaefer-900_MPC_gradients.txt       # Microstructural gradient with schaefer-900 atlas
+│   ├── schaefer-1000_MPC_gradients.txt      # Microstructural gradient with schaefer-1000 atlas
+│   ├── vosdewael-100_MPC_gradients.txt      # Microstructural gradient with vosdewael-100 atlas
+│   ├── vosdewael-200_MPC_gradients.txt      # Microstructural gradient with vosdewael-200 atlas
+│   ├── vosdewael-300_MPC_gradients.txt      # Microstructural gradient with vosdewael-300 atlas
+│   ├── vosdewael-400_MPC_gradients.txt      # Microstructural gradient with vosdewael-400 atlas
+│   ├── aparc_MPC_gradients.txt              # Microstructural gradient with aparc atlas
+│   ├── aparc-a2009s_MPC_gradients.txt       # Microstructural gradient with aparc-a2009s atlas
+│   ├── economo_MPC_gradients.txt            # Microstructural gradient with economo atlas
+│   └── glasser-360_MPC_gradients.txt        # Microstructural gradient with glasser-360 atlas
+└── ...
+</pre></div>
+</div>
+</section>
+<section id="synthesized-t2-weighted-mri">
+<h3>Synthesized T2-weighted MRI<a class="headerlink" href="#synthesized-t2-weighted-mri" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>Actual T2w (top) / Synthesized T2w (bottom)</p></li>
+</ul>
+<a class="reference internal image-reference" href="../_images/t2.png"><img alt="../_images/t2.png" class="align-center" src="../_images/t2.png" style="width: 500px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="synthesized-mpc-matrix">
+<h3>Synthesized MPC matrix<a class="headerlink" href="#synthesized-mpc-matrix" title="Permalink to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">nilearn</span> <span class="kn">import</span> <span class="n">plotting</span>
+
+<span class="c1"># load matrix</span>
+<span class="n">matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s2">&quot;~/output_dir/sub/schaefer-400_MPC_matrix.txt&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">matrix</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>MPC matrix visualization.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plotting</span><span class="o">.</span><span class="n">plot_matrix</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Purples&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../_images/matrix.png"><img alt="../_images/matrix.png" class="align-center" src="../_images/matrix.png" style="width: 600px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="synthesized-microstructural-gradient">
+<h3>Synthesized microstructural gradient<a class="headerlink" href="#synthesized-microstructural-gradient" title="Permalink to this heading"></a></h3>
+<p>We calculate gradients using diffusion embeding and normalized angle similarity with 0.9 sparsity. More detail in <em>/GAN-MAT/functions/preprocessing.py</em></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="n">grads_400</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s2">&quot;~/output_dir/sub/schaefer-400_MPC_gradients.txt&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">grads_400</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nibabel</span> <span class="k">as</span> <span class="nn">nib</span>
+<span class="kn">from</span> <span class="nn">brainspace.datasets</span> <span class="kn">import</span> <span class="n">load_fsa5</span>
+<span class="kn">from</span> <span class="nn">brainspace.plotting</span> <span class="kn">import</span> <span class="n">plot_hemispheres</span>
+<span class="kn">from</span> <span class="nn">brainspace.utils.parcellation</span> <span class="kn">import</span> <span class="n">map_to_labels</span>
+
+<span class="c1"># Load the fsaverage5 surfaces</span>
+<span class="n">fs5_lh</span><span class="p">,</span> <span class="n">fs5_rh</span> <span class="o">=</span> <span class="n">load_fsa5</span><span class="p">()</span>
+
+<span class="c1"># Load annotation file in fsaverage5</span>
+<span class="n">annot_lh_fs5</span><span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">freesurfer</span><span class="o">.</span><span class="n">read_annot</span><span class="p">(</span><span class="s2">&quot;~/GAN-MAT/parcellations/lh.schaefer-400_mics.annot&quot;</span><span class="p">)</span>
+<span class="n">annot_rh_fs5</span><span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">freesurfer</span><span class="o">.</span><span class="n">read_annot</span><span class="p">(</span><span class="s2">&quot;~/GAN-MAT/parcellations/rh.schaefer-400_mics.annot&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="mi">200</span>
+<span class="n">annot_rh_fs5</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">annot_rh_fs5</span><span class="o">==</span><span class="mi">200</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">annot_rh_fs5</span><span class="p">)</span>
+<span class="n">labels_fs5</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">annot_lh_fs5</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">annot_rh_fs5</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Mask of the medial wall on fsaverage5</span>
+<span class="n">mask_fs5</span> <span class="o">=</span> <span class="n">labels_fs5</span> <span class="o">!=</span> <span class="mi">0</span>
+
+<span class="c1"># Map gradients to original parcels</span>
+<span class="n">grad</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">grad</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">map_to_labels</span><span class="p">(</span><span class="o">-</span><span class="n">grads_400</span><span class="p">[:,</span><span class="n">i</span><span class="p">],</span> <span class="n">labels_fs5</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="n">mask_fs5</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
+
+<span class="c1"># Plot gradients</span>
+<span class="n">plot_hemispheres</span><span class="p">(</span><span class="n">fs5_lh</span><span class="p">,</span> <span class="n">fs5_rh</span><span class="p">,</span> <span class="n">array_name</span><span class="o">=</span><span class="n">grad</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">1800</span><span class="p">,</span> <span class="mi">600</span><span class="p">),</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;coolwarm&#39;</span><span class="p">,</span>
+             <span class="n">color_bar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">label_text</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Grad1&#39;</span><span class="p">],</span> <span class="n">zoom</span><span class="o">=</span><span class="mf">1.2</span><span class="p">)</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../_images/gradient.png"><img alt="../_images/gradient.png" class="align-center" src="../_images/gradient.png" style="width: 100%;" /></a>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="USAGE%20NOTES.html" class="btn btn-neutral float-left" title="USAGE NOTES" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="REFERENCES%20%26%20ACKNOWLEDGMENTS.html" class="btn btn-neutral float-right" title="REFERENCES &amp; ACKNOWLEDGMENTS" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, CAMIN.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

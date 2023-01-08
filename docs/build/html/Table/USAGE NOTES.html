@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>USAGE NOTES &mdash; GAN-MAT 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="MAIN OUTPUTS" href="MAIN%20OUTPUTS.html" />
+    <link rel="prev" title="INSTALLATION" href="INSTALLATION.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> GAN-MAT
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="INSTALLATION.html">INSTALLATION</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">USAGE NOTES</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#gan-mat-structure">GAN-MAT structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#run-gan-mat">Run GAN-MAT</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="MAIN%20OUTPUTS.html">MAIN OUTPUTS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="REFERENCES%20%26%20ACKNOWLEDGMENTS.html">REFERENCES &amp; ACKNOWLEDGMENTS</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">GAN-MAT</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">USAGE NOTES</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/CAMIN-neuro/GAN-MAT/blob/main/docs/source/Table/USAGE NOTES.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="usage-notes">
+<h1>USAGE NOTES<a class="headerlink" href="#usage-notes" title="Permalink to this heading"></a></h1>
+<section id="gan-mat-structure">
+<h2>GAN-MAT structure<a class="headerlink" href="#gan-mat-structure" title="Permalink to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>GAN-MAT
+├── functions
+│   └── model
+├── parcellations
+├── template
+├── folder_setting.ipynb
+└── gan-mat
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>functions</strong>: : A folder containing (i) the GAN model (functions/model) to synthesize the T2-weighted MRI from the T1-weighted MRI, and (ii) necessary scripts to calculate myelin-sensitive proxy (T1w/T2w ratio) and (iii) to generate microstructural profile covariance (MPC) and its gradient.</p></li>
+<li><p><strong>parcellations</strong>: A folder containing 18 different atlases: aparc, aparc-a2009s, economo, glasser-360, schaefer-100~1000, vosdewael-100~400.</p></li>
+<li><p><strong>template</strong>: A folder containing the MNI 0.7mm T1 template for initial registration.</p></li>
+<li><p><strong>folder_setting.ipynb</strong>: A file converting input data to an appropriate format to run the pipeline.</p></li>
+<li><p><strong>gan-mat</strong>: A main script to run GAN-MAT.</p></li>
+</ul>
+</section>
+<section id="run-gan-mat">
+<h2>Run GAN-MAT<a class="headerlink" href="#run-gan-mat" title="Permalink to this heading"></a></h2>
+<p><strong>1. Set up the directory with a specific format  using</strong> <em>folder_setting.ipynb</em> <strong>as follows:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>input_dir
+├── 105923                                        # Subject ID
+│   └── T1w
+│       ├── 105923                                # Subject ID
+│       │   ├── anat
+│       │   │   └── surfaces
+│       │   │       └── micro_profiles
+│       │   ├── label                             # freesurfer output
+│       │   │   ├── lh.cortex.label
+│       │   │   └── rh.cortex.label
+│       │   ├── mri                               # freesurfer output
+│       │   │   ├── orig.mgz
+│       │   │   └── orig
+│       │   │       └── 001.mgz
+│       │   └── surf                              # freesurfer output
+│       │       ├── lh.area
+│       │       ├── lh.area.pial
+│       │       ├── lh.pial
+│       │       ├── lh.sphere.reg
+│       │       ├── lh.thickness
+│       │       ├── lh.white
+│       │       ├── rh.area
+│       │       ├── rh.area.pial
+│       │       ├── rh.pial
+│       │       ├── rh.sphere.reg
+│       │       ├── rh.thickness
+│       │       └── rh.white
+│       └── T1w.nii.gz                            # input T1-weighted MRI
+└── ...
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>We use <strong>T1w_acpc_dc.nii.gz</strong> for <strong>T1w.nii.gz</strong>. So you need to use bias field corrected T1-weighted MRI.</p>
+</div>
+<p><strong>2. run</strong> <em>gan-mat</em>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gan</span><span class="o">-</span><span class="n">mat</span> <span class="o">-</span><span class="n">input_dir</span> <span class="o">/</span><span class="n">INPUT</span><span class="o">/</span><span class="n">DATA</span><span class="o">/</span><span class="n">PATH</span> <span class="o">-</span><span class="n">output_dir</span> <span class="o">/</span><span class="n">OUTPUT</span><span class="o">/</span><span class="n">PATH</span> <span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 17%" />
+<col style="width: 83%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>Options</strong></p></td>
+<td><p><strong>Description</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>batch_size &lt;num&gt;</p></td>
+<td><p>Number of the batch size while synthesizing the T2-weighted MRI (default = 1)</p></td>
+</tr>
+<tr class="row-odd"><td><p>threads &lt;num&gt;</p></td>
+<td><p>Number of threads (default = 6)</p></td>
+</tr>
+<tr class="row-even"><td><p>T2</p></td>
+<td><p>Synthesize T2-weight MRI and terminate</p></td>
+</tr>
+<tr class="row-odd"><td><p>myelin</p></td>
+<td><p>Compute myelin-sensitive proxy (T1w/T2w ratio) and terminate</p></td>
+</tr>
+<tr class="row-even"><td><p>matrix</p></td>
+<td><p>Calculate microstructural profile covariance (MPC) matrix and terminate</p></td>
+</tr>
+<tr class="row-odd"><td><p>gradients</p></td>
+<td><p>Generate microstructural gradient and terminate</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>If options of features (T2, myelin, matrix, gradients) are not provided, the pipeline will generate all outputs.</p></li>
+<li><p>All the outputs will be stored in the individual subject’s folder.</p></li>
+</ul>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If the batch size is one, more than 10GB of GPU memory is required. In the case of low GPU capacity, change the <strong>device</strong> variable in the <em>~/GAN-MAT/functions/model/t2.py</em>.</p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="INSTALLATION.html" class="btn btn-neutral float-left" title="INSTALLATION" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="MAIN%20OUTPUTS.html" class="btn btn-neutral float-right" title="MAIN OUTPUTS" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, CAMIN.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
