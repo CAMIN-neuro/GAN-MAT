@@ -2,7 +2,7 @@
 INSTALLATION
 ------------
 
-GAN-MAT works on Python == 3.9
+GAN-MAT was developed on Python 3.9.
   
 Dependencies & Python packages
 ==============================
@@ -39,11 +39,10 @@ Installation
    
 .. code-block::
 
-   mv ~/Downloads/model.pth ~/GAN-MAT/functions/model.pth
+   mv /DOWNLOAD/DIRECTORY/model.pth /GAN-MAT/DIRECTORY/GAN-MAT/functions/model 
+   # Change  the path to your directories!
 
-Change the path to your directories!
-
-**4. Set up environment:**
+**4. Set the environment:**
 
 .. code-block::
    

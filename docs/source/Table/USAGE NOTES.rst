@@ -59,10 +59,9 @@ Run GAN-MAT
    └── ...
 
 .. warning::
-   We use **T1w_acpc_dc.nii.gz** for **T1w.nii.gz**. So you need to use bias field corrected T1-weighted MRI.
+   Use bias field corrected T1-weighted image (T1w.nii.gz).
 
-
-**2. run** *gan-mat*.
+**2. Run** *gan-mat*.
 
 .. code-block::
 

@@ -164,7 +164,7 @@
 </section>
 <section id="synthesized-microstructural-gradient">
 <h3>Synthesized microstructural gradient<a class="headerlink" href="#synthesized-microstructural-gradient" title="Permalink to this heading"></a></h3>
-<p>We calculate gradients using diffusion embeding and normalized angle similarity with 0.9 sparsity. More detail in <em>/GAN-MAT/functions/preprocessing.py</em></p>
+<p>We calculated gradients using diffusion embedding and normalized angle kernel with 0.9 sparsity. More details in <em>/GAN-MAT/functions/preprocessing.py</em></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="n">grads_400</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s2">&quot;~/output_dir/sub/schaefer-400_MPC_gradients.txt&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">grads_400</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
@@ -197,7 +197,7 @@
 
 <span class="c1"># Plot gradients</span>
 <span class="n">plot_hemispheres</span><span class="p">(</span><span class="n">fs5_lh</span><span class="p">,</span> <span class="n">fs5_rh</span><span class="p">,</span> <span class="n">array_name</span><span class="o">=</span><span class="n">grad</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">1800</span><span class="p">,</span> <span class="mi">600</span><span class="p">),</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;coolwarm&#39;</span><span class="p">,</span>
-             <span class="n">color_bar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">label_text</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Grad1&#39;</span><span class="p">],</span> <span class="n">zoom</span><span class="o">=</span><span class="mf">1.2</span><span class="p">)</span>
+             <span class="n">color_bar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">label_text</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Gradient&#39;</span><span class="p">],</span> <span class="n">zoom</span><span class="o">=</span><span class="mf">1.2</span><span class="p">)</span>
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="../_images/gradient.png"><img alt="../_images/gradient.png" class="align-center" src="../_images/gradient.png" style="width: 100%;" /></a>

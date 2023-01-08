@@ -92,7 +92,7 @@ MPC matrix visualization.
 Synthesized microstructural gradient
 ---------------------------------------------------
 
-We calculate gradients using diffusion embeding and normalized angle similarity with 0.9 sparsity. More detail in */GAN-MAT/functions/preprocessing.py* 
+We calculated gradients using diffusion embedding and normalized angle kernel with 0.9 sparsity. More details in */GAN-MAT/functions/preprocessing.py*
 
 .. code-block::
 
@@ -128,7 +128,7 @@ We calculate gradients using diffusion embeding and normalized angle similarity 
    
    # Plot gradients
    plot_hemispheres(fs5_lh, fs5_rh, array_name=grad, size=(1800, 600), cmap='coolwarm',
-                color_bar=True, label_text=['Grad1'], zoom=1.2)
+                color_bar=True, label_text=['Gradient'], zoom=1.2)
                 
 .. image:: fig/gradient.png
    :width: 100%

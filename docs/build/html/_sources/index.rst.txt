@@ -16,15 +16,15 @@ Three main features of GAN-MAT:
 
 **1. T1w to T2w MRI synthesis**
 
-GAN-MAT synthesizes 3D T2-weighted MRI from 3D T1-weighted MRI using a generative adversarial network (GAN). 
+   GAN-MAT synthesizes 3D T2-weighted MRI from 3D T1-weighted MRI using a generative adversarial network (GAN). 
 
 **2. Myelin-sensitive proxy calculation**
 
-Using the synthesized T2-weighted MRI, it calculates the ratio between T1- and T2-weighted MRI.
+   Using the synthesized T2-weighted MRI, it calculates the ratio between T1- and T2-weighted MRI.
 
 **3. Microstructural profile covariance and gradient generation**
 
-The ready-to-use microstructural profile covariance (MPC) matrix and its gradient are generated. 
+   The ready-to-use microstructural profile covariance (MPC) matrix and its gradient are generated. 
 
 .. toctree::
    :maxdepth: 1
