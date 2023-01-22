@@ -1,4 +1,6 @@
 # GAN-MAT
+<p align="center"><img width="80%" src="https://camin-neuro.github.io/GAN-MAT/build/html/_images/figure.png"/>
+
 ## Generative Adversarial Network-based Microstructural profile covariance Analysis Toolbox
 
 GAN-MAT is a comprehensive pipeline to analyze brain microstructure using only the T1-weighted MRI. Out pipeline provides three main features: (1) It synthesizes 3D T2-weighted MRI from 3D T1-weighted MRI using a generative adversarial network (GAN). (2) It calculates the myelin-sensitive proxy (T1w/T2w ratio) using the synthesized T2-weighted MRI. (3) It estimates the ready-to-use microstructural profile covariance (MPC) matrix and microstructural gradient.
