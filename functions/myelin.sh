@@ -9,7 +9,7 @@ sub_list=$(<$output_dir/sub_list.txt)
 for sub in "$input_dir"/*
 do
 	# making myelin image
-	${CARET7DIR}/wb_command -volume-math "clamp((T1w / T2w), 0, 100)" $sub/myelin.nii.gz -var T1w $sub/input_T1w.nii.gz -var T2w $sub/output_T2w.nii.gz -fixnan 0
+	wb_command -volume-math "clamp((T1w / T2w), 0, 100)" $sub/myelin.nii.gz -var T1w $sub/input_T1w.nii.gz -var T2w $sub/output_T2w.nii.gz -fixnan 0
 
 	# making input T1 brain_mask
 	$FSL_DIR/bin/bet $sub/input_T1w.nii.gz $sub/input_T1w_brain.nii.gz -f 0.5 -g 0 -n -m
