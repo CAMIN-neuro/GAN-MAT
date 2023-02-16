@@ -14,13 +14,12 @@ do
 	# making input T1 brain_mask
 	$FSL_DIR/bin/bet $sub/input_T1w.nii.gz $sub/input_T1w_brain.nii.gz -f 0.5 -g 0 -n -m
 
-	# making myelin_brain image
-	python $pipeline_dir/functions/preprocessing.py --GANMAT=$pipeline_dir --input_dir=$input_dir --output_dir=$output_dir --myelin_brain=True
-
 	# making original T1w_brain
 	$FSL_DIR/bin/bet $sub/T1w/T1w.nii.gz $sub/T1w/T1w_brain.nii.gz -f 0.5 -g 0
-
 done
+
+# making myelin_brain image
+python $pipeline_dir/functions/preprocessing.py --GANMAT=$pipeline_dir --input_dir=$input_dir --output_dir=$output_dir --myelin_brain=True
 
 # myelin_brain registrate to original T1w_brain
 {
