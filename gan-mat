@@ -11,6 +11,7 @@ T2=None
 myelin=None
 matrix=None
 gradients=None
+moment=None
 all=TRUE
 
 ## input variables
@@ -49,6 +50,11 @@ do
  
   -gradients)
     gradients=TRUE
+    shift
+  ;;
+
+  -moment)
+    moment=TRUE
     shift
   ;;
 
@@ -108,6 +114,7 @@ sub_list=$(<$output_dir/sub_list.txt)
 ## making input image
 python $GANMAT/functions/preprocessing.py --GANMAT=$GANMAT --input_dir=$input_dir --output_dir=$output_dir --resize=TRUE
 
+
 ## making T2 image
 python $GANMAT/functions/model/main.py --pipeline_dir=$GANMAT --input_dir=$input_dir --batch_size=$batch_size
 
@@ -143,6 +150,7 @@ if [ $myelin == TRUE ] || [ $all == TRUE ]; then
 	fi
 fi
 #######################################################################################
+
 
 ## MPC surface
 for sub in $sub_list
@@ -185,7 +193,15 @@ if [ $gradients == TRUE ] || [ $all == TRUE ]; then
 fi
 #######################################################################################
 
+python $GANMAT/functions/preprocessing.py --GANMAT=$GANMAT --input_dir=$input_dir --output_dir=$output_dir --moment=TRUE
 
+##### momnet
+if [ $moment == TRUE ] || [ $all == TRUE ]; then
+        python $GANMAT/functions/preprocessing.py --GANMAT=$GANMAT --input_dir=$input_dir --output_dir=$output_dir --moment_save=TRUE
 
-
+        if [ $moment == TRUE ]; then
+                exit
+        fi
+fi
+#######################################################################################
 

@@ -3,6 +3,7 @@ import shutil
 import argparse
 import numpy as np
 import nibabel as nib
+from scipy.stats import skew, kurtosis
 
 from brainspace.gradient import GradientMaps
 from skimage import transform
@@ -20,6 +21,8 @@ parser.add_argument("--matrix", default=False)
 parser.add_argument("--save_matrix", default=False)
 parser.add_argument("--gradients", default=False)
 parser.add_argument("--save_gradients", default=False)
+parser.add_argument("--moment", default=False)
+parser.add_argument("--moment_save", default=False)
 args = parser.parse_args()
 
 GANMAT = args.GANMAT
@@ -34,6 +37,8 @@ matrix = args.matrix
 save_matrix = args.save_matrix
 gradients = args.gradients
 save_gradients = args.save_gradients
+moment = args.moment
+moment_save = args.moment_save
 
 sub_list = os.listdir(input_dir)
 
@@ -79,13 +84,15 @@ if matrix:
         for atlas in atlas_ls:
             atlas = atlas.split('.')[0].split("_")[0]
             
-            temp = np.loadtxt(input_dir + "/{}/T1w/{}/anat/surfaces/micro_profiles/{}_space-fsaverage5_atlas-{}_desc-MPC.txt".format(sub, sub, sub, atlas), dtype=np.float, delimiter=' ')
+            temp = np.loadtxt(input_dir + "/{}/T1w/{}/anat/surfaces/micro_profiles/{}_space-fsaverage5_atlas-{}_desc-MPC.txt".format(sub, sub, sub, atlas), dtype=np.float64, delimiter=' ')
             MPC = np.triu(temp, 1) + temp.T
             
             idx = np.where(MPC.sum(0)==0)[0]
             MPC = np.delete(np.delete(MPC, idx, axis=0), idx, axis=1)
 
             np.savetxt(input_dir + "/{}/T1w/{}/anat/surfaces/micro_profiles/{}_MPC_matrix.txt".format(sub, sub, atlas), MPC)
+
+        print("Make sub-{} matrix".format(sub))
 
 if save_matrix:
     f = open(GANMAT + "/parcellations/atlas_list.txt", 'r')
@@ -98,6 +105,8 @@ if save_matrix:
 
             shutil.copy(input_dir + "/{}/T1w/{}/anat/surfaces/micro_profiles/{}_MPC_matrix.txt".format(sub, sub, atlas), output_dir + "/{}/{}_MPC_matrix.txt".format(sub, atlas))
 
+        print("Save sub-{} matrix".format(sub))
+
 
 if gradients:
     f = open(GANMAT + "/parcellations/atlas_list.txt", 'r')
@@ -109,7 +118,7 @@ if gradients:
             atlas = atlas.split('.')[0].split("_")[0]
             
             ## load MPC matrix
-            temp = np.loadtxt(input_dir + "/{}/T1w/{}/anat/surfaces/micro_profiles/{}_MPC_matrix.txt".format(sub, sub, atlas), dtype=np.float, delimiter=' ')
+            temp = np.loadtxt(input_dir + "/{}/T1w/{}/anat/surfaces/micro_profiles/{}_MPC_matrix.txt".format(sub, sub, atlas), dtype=np.float64, delimiter=' ')
             
             ## delete all 0 rows
             del_ls = np.where(temp.sum(0)==0)[0]
@@ -126,6 +135,8 @@ if gradients:
             ## save gradients
             np.savetxt(input_dir + "/{}/T1w/{}/anat/surfaces/micro_profiles/{}_MPC_gradients.txt".format(sub, sub, atlas), grads)
 
+        print("Make sub-{} gradients".format(sub))
+
 if save_gradients:
     f = open(GANMAT + "/parcellations/atlas_list.txt", 'r')
     atlas_ls = f.read()
@@ -136,7 +147,47 @@ if save_gradients:
             atlas = atlas.split('.')[0].split("_")[0]
 
             shutil.copy(input_dir + "/{}/T1w/{}/anat/surfaces/micro_profiles/{}_MPC_gradients.txt".format(sub, sub, atlas), output_dir + "/{}/{}_MPC_gradients.txt".format(sub, atlas))
-
             
+        print("Save sub-{} gradients".format(sub))
+            
+if moment:
+    f = open(GANMAT + "/parcellations/atlas_list.txt", 'r')
+    atlas_ls = f.read()
+    atlas_ls = atlas_ls.split("\n")[:-1]
 
+    for sub in sub_list:
+        for atlas in atlas_ls:
+            atlas = atlas.split('.')[0].split("_")[0]
+            
+            # load intensity
+            temp = np.loadtxt(input_dir + "/{}/T1w/{}/anat/surfaces/micro_profiles/{}_space-fsaverage5_atlas-{}_desc-intensity_profiles.txt".format(sub, sub, sub, atlas), dtype=np.float64, delimiter=' ')
 
+            # delete nan
+            nan_ls = np.unique(np.where(np.isnan(temp))[1])
+            inten = np.delete(temp, nan_ls, axis=1)
+
+            # momnet
+            mean = inten.mean(0)
+            var = inten.var(0)
+            skew_ = skew(inten)
+            kurto_ = kurtosis(inten)
+
+            moment = np.vstack((mean, var, skew_, kurto_))
+
+            # save momnet
+            np.savetxt(input_dir + "/{}/T1w/{}/anat/surfaces/micro_profiles/{}_moment.txt".format(sub, sub, atlas), moment)
+            
+        print("Make sub-{} moment".format(sub))
+
+if moment_save:
+    f = open(GANMAT + "/parcellations/atlas_list.txt", 'r')
+    atlas_ls = f.read()
+    atlas_ls = atlas_ls.split("\n")[:-1]
+
+    for sub in sub_list:
+        for atlas in atlas_ls:
+            atlas = atlas.split('.')[0].split("_")[0]
+
+            shutil.copy(input_dir + "/{}/T1w/{}/anat/surfaces/micro_profiles/{}_moment.txt".format(sub, sub, atlas), output_dir + "/{}/{}_MPC_moment.txt".format(sub, atlas))
+            
+        print("Save sub-{} moment".format(sub))

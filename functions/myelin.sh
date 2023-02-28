@@ -16,6 +16,7 @@ do
 
 	# making original T1w_brain
 	$FSL_DIR/bin/bet $sub/T1w/T1w.nii.gz $sub/T1w/T1w_brain.nii.gz -f 0.5 -g 0
+
 done
 
 # making myelin_brain image
@@ -30,5 +31,4 @@ python $pipeline_dir/functions/preprocessing.py --GANMAT=$pipeline_dir --input_d
         	$FSL_DIR/bin/flirt -in $input_dir/$sub/myelin_brain.nii.gz -ref $input_dir/$sub/T1w/T1w_brain.nii.gz -out $input_dir/$sub/T1w/myelin_brain_regi.nii.gz
 	done
 }
-
 
