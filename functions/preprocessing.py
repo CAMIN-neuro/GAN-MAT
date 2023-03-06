@@ -87,7 +87,11 @@ if matrix:
             temp = np.loadtxt(input_dir + "/{}/T1w/{}/anat/surfaces/micro_profiles/{}_space-fsaverage5_atlas-{}_desc-MPC.txt".format(sub, sub, sub, atlas), dtype=np.float64, delimiter=' ')
             MPC = np.triu(temp, 1) + temp.T
             
-            idx = np.where(MPC.sum(0)==0)[0]
+            if atlas == "aparc-a2009s":
+                idx = [41, 116]
+            else:
+                idx = [0, int(len(MPC) / 2)]
+            
             MPC = np.delete(np.delete(MPC, idx, axis=0), idx, axis=1)
 
             np.savetxt(input_dir + "/{}/T1w/{}/anat/surfaces/micro_profiles/{}_MPC_matrix.txt".format(sub, sub, atlas), MPC)
