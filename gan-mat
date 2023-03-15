@@ -143,7 +143,7 @@ source $GANMAT/functions/myelin.sh $GANMAT $input_dir $output_dir $threads
 if [ $myelin == TRUE ] || [ $all == TRUE ]; then
         for sub in $sub_list
 	do
-		cp $input_dir/$sub/T1w/myelin_brain_regi.nii.gz $output_dir/$sub/myelin.nii.gz 
+		cp $input_dir/$sub/T1w/myelin_brain_regi.nii.gz $output_dir/$sub/microstructure.nii.gz 
 	done
 	if [ $myelin == TRUE ]; then
 		exit
