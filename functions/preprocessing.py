@@ -173,11 +173,11 @@ if moment:
 
             # momnet
             mean = inten.mean(0)
-            var = inten.var(0)
+            std = inten.std(0)
             skew_ = skew(inten)
             kurto_ = kurtosis(inten)
 
-            moment = np.vstack((mean, var, skew_, kurto_))
+            moment = np.vstack((mean, std, skew_, kurto_))
 
             # save momnet
             np.savetxt(input_dir + "/{}/T1w/{}/anat/surfaces/micro_profiles/{}_moment.txt".format(sub, sub, atlas), moment)
