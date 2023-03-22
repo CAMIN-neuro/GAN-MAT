@@ -49,6 +49,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#synthesized-t2-weighted-mri">Synthesized T2-weighted MRI</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#synthesized-mpc-matrix">Synthesized MPC matrix</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#synthesized-microstructural-gradient">Synthesized microstructural gradient</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#synthesized-microstructural-moments">Synthesized microstructural moments</a></li>
 </ul>
 </li>
 </ul>
@@ -219,6 +220,31 @@
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="../_images/gradient.png"><img alt="../_images/gradient.png" class="align-center" src="../_images/gradient.png" style="width: 100%;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="synthesized-microstructural-moments">
+<h3>Synthesized microstructural moments<a class="headerlink" href="#synthesized-microstructural-moments" title="Permalink to this heading"></a></h3>
+<p>We provide microstructural moment features(mean, standard deviation, skewness, kurtosis).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">moments_400</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s2">&quot;~/output_dir/sub/schaefer-400_MPC_moment.txt&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">moments_400</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Map moments to original parcels</span>
+<span class="n">moments</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+    <span class="n">moments</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">map_to_labels</span><span class="p">(</span><span class="n">moments_400</span><span class="p">[:,</span><span class="n">i</span><span class="p">],</span> <span class="n">labels_fs5</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="n">mask_fs5</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
+
+<span class="c1"># Plot gradients</span>
+<span class="n">plot_hemispheres</span><span class="p">(</span><span class="n">fs5_lh</span><span class="p">,</span> <span class="n">fs5_rh</span><span class="p">,</span> <span class="n">array_name</span><span class="o">=</span><span class="n">moments</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">1600</span><span class="p">,</span> <span class="mi">1200</span><span class="p">),</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;coolwarm&#39;</span><span class="p">,</span>
+             <span class="n">color_bar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">label_text</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Mean&#39;</span><span class="p">,</span> <span class="s2">&quot;SD&quot;</span><span class="p">,</span> <span class="s2">&quot;Skewness&quot;</span><span class="p">,</span> <span class="s2">&quot;Kurtosis&quot;</span><span class="p">],</span> <span class="n">zoom</span><span class="o">=</span><span class="mf">1.35</span><span class="p">)</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../_images/moments.png"><img alt="../_images/moments.png" class="align-center" src="../_images/moments.png" style="width: 100%;" /></a>
 </section>
 </section>
 </section>

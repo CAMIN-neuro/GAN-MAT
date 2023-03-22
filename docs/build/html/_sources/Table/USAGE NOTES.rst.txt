@@ -40,6 +40,7 @@ Run GAN-MAT
    │       │   │   └── rh.cortex.label
    │       │   ├── mri                               # freesurfer output
    │       │   │   ├── orig.mgz
+   │       │   │   ├── brainmask.mgz
    │       │   │   └── orig
    │       │   │       └── 001.mgz
    │       │   └── surf                              # freesurfer output

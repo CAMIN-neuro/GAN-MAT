@@ -151,3 +151,34 @@ We calculated gradients using diffusion embedding and normalized angle kernel wi
 .. image:: fig/gradient.png
    :width: 100%
    :align: center
+
+|
+
+Synthesized microstructural moments
+---------------------------------------------------
+
+We provide microstructural moment features(mean, standard deviation, skewness, kurtosis).
+
+.. code-block::
+
+   moments_400 = np.loadtxt("~/output_dir/sub/schaefer-400_MPC_moment.txt")
+   print(moments_400.shape)
+
+>>> (4, 400)
+
+.. code-block::
+
+   # Map moments to original parcels
+   moments = [None]
+   for i in range(4):
+       moments[i] = map_to_labels(moments_400[:,i], labels_fs5, mask=mask_fs5, fill=np.nan)
+   
+   # Plot gradients
+   plot_hemispheres(fs5_lh, fs5_rh, array_name=moments, size=(1600, 1200), cmap='coolwarm',
+                color_bar=True, label_text=['Mean', "SD", "Skewness", "Kurtosis"], zoom=1.35)
+
+
+.. image:: fig/moments.png
+   :width: 100%
+   :align: center
+
