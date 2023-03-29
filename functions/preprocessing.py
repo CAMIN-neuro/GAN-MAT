@@ -40,13 +40,13 @@ save_gradients = args.save_gradients
 moment = args.moment
 moment_save = args.moment_save
 
-sub_list = os.listdir(input_dir)
-
 if make_sub_list:
+    sub_list = os.listdir(input_dir)
     f = open(output_dir + "/sub_list.txt", 'w')
     for i in range(0, len(sub_list)):
         f.write(sub_list[i] + " ")
     f.close()
+
 
 if make_dir:
     for i in range(0, len(sub_list)):
