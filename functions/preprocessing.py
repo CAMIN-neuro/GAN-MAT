@@ -47,6 +47,8 @@ if make_sub_list:
         f.write(sub_list[i] + " ")
     f.close()
 
+f = open(output_dir + "/sub_list.txt", mode='r')
+sub_list = f.readlines()[0].split()
 
 if make_dir:
     for i in range(0, len(sub_list)):
