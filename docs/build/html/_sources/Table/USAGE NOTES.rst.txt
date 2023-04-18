@@ -60,7 +60,7 @@ Run GAN-MAT
    └── ...
 
 .. warning::
-   Use bias field corrected T1-weighted image (T1w.nii.gz).
+   Use not bias field corrected T1-weighted image (T1w.nii.gz).
 
 **2. Run** *gan-mat*.
 

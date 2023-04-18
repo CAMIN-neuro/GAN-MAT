@@ -137,8 +137,8 @@ if gradients:
             ## insert 0 in delete position
             grads = grad_map.gradients_.copy()
             for idx in del_ls:
-                grads = np.insert(grads, idx, 0, axis=0)
-
+               grads = np.insert(grads, idx, 0, axis=0)
+            
             ## save gradients
             np.savetxt(input_dir + "/{}/T1w/{}/anat/surfaces/micro_profiles/{}_MPC_gradients.txt".format(sub, sub, atlas), grads)
 

@@ -96,40 +96,27 @@ fi
 atlas_list=$(<$GANMAT/parcellations/atlas_list.txt)
 
 ## make sub list
-python $GANMAT/functions/preprocessing.py --GANMAT=$GANMAT --input_dir=$input_dir --output_dir=$output_dir --make_sub_list=TRUE
-python $GANMAT/functions/preprocessing.py --GANMAT=$GANMAT --input_dir=$input_dir --output_dir=$output_dir --make_dir=TRUE
+#python $GANMAT/functions/preprocessing.py --GANMAT=$GANMAT --input_dir=$input_dir --output_dir=$output_dir --make_sub_list=TRUE
+#python $GANMAT/functions/preprocessing.py --GANMAT=$GANMAT --input_dir=$input_dir --output_dir=$output_dir --make_dir=TRUE
 
 sub_list=$(<$output_dir/sub_list.txt)
 
+## bias-field correction for registration
+#source $GANMAT/functions/registration.sh $GANMAT $input_dir $output_dir $threads bias
+
 ## T1 registrate to MNI152_T1_0.7mm.nii.gz
-{
-	parallel -j $threads $FSL_DIR/bin/flirt -in $input_dir/{}/T1w/T1w.nii.gz -ref $GANMAT/template/MNI152_T1_0.7mm.nii.gz -out $input_dir/{}/T1w_regi.nii.gz ::: $sub_list
-} || {
-	for sub in $sub_list
-	do
-        	$FSL_DIR/bin/flirt -in $input_dir/$sub/T1w/T1w.nii.gz -ref $GANMAT/template/MNI152_T1_0.7mm.nii.gz -out $input_dir/$sub/T1w_regi.nii.gz
-	done
-}
+source $GANMAT/functions/registration.sh $GANMAT $input_dir $output_dir $threads input
 
 ## making input image
 python $GANMAT/functions/preprocessing.py --GANMAT=$GANMAT --input_dir=$input_dir --output_dir=$output_dir --resize=TRUE
 
-
 ## making T2 image
 python $GANMAT/functions/model/main.py --pipeline_dir=$GANMAT --input_dir=$input_dir --batch_size=$batch_size
 
-
 ##### T2
 if [ $T2 == TRUE ] || [ $all == TRUE ]; then
-	{
-		parallel -j $threads $FSL_DIR/bin/flirt -in $input_dir/{}/output_T2w.nii.gz -ref $input_dir/{}/T1w/T1w.nii.gz -out $output_dir/{}/T2w.nii.gz ::: $sub_list	
-	} || {
-		for sub in $sub_list
-		do
-        		$FSL_DIR/bin/flirt -in $input_dir/$sub/output_T2w.nii.gz -ref $input_dir/$sub/T1w/T1w.nii.gz -out $output_dir/$sub/T2w.nii.gz
-		done
-	}
-	
+	source $GANMAT/functions/registration.sh $GANMAT $input_dir $output_dir $threads t2
+
 	if [ $T2 == TRUE ]; then
 		exit
 	fi
@@ -143,14 +130,13 @@ source $GANMAT/functions/myelin.sh $GANMAT $input_dir $output_dir $threads
 if [ $myelin == TRUE ] || [ $all == TRUE ]; then
         for sub in $sub_list
 	do
-		cp $input_dir/$sub/T1w/myelin_brain_regi.nii.gz $output_dir/$sub/microstructure.nii.gz 
+		cp $input_dir/$sub/T1w/myelin_brain_regi.nii.gz $output_dir/$sub/myelin.nii.gz 
 	done
 	if [ $myelin == TRUE ]; then
 		exit
 	fi
 fi
 #######################################################################################
-
 
 ## MPC surface
 for sub in $sub_list
@@ -204,4 +190,3 @@ if [ $moment == TRUE ] || [ $all == TRUE ]; then
         fi
 fi
 #######################################################################################
-
