@@ -96,13 +96,13 @@ fi
 atlas_list=$(<$GANMAT/parcellations/atlas_list.txt)
 
 ## make sub list
-#python $GANMAT/functions/preprocessing.py --GANMAT=$GANMAT --input_dir=$input_dir --output_dir=$output_dir --make_sub_list=TRUE
-#python $GANMAT/functions/preprocessing.py --GANMAT=$GANMAT --input_dir=$input_dir --output_dir=$output_dir --make_dir=TRUE
+python $GANMAT/functions/preprocessing.py --GANMAT=$GANMAT --input_dir=$input_dir --output_dir=$output_dir --make_sub_list=TRUE
+python $GANMAT/functions/preprocessing.py --GANMAT=$GANMAT --input_dir=$input_dir --output_dir=$output_dir --make_dir=TRUE
 
 sub_list=$(<$output_dir/sub_list.txt)
 
 ## bias-field correction for registration
-#source $GANMAT/functions/registration.sh $GANMAT $input_dir $output_dir $threads bias
+source $GANMAT/functions/registration.sh $GANMAT $input_dir $output_dir $threads bias
 
 ## T1 registrate to MNI152_T1_0.7mm.nii.gz
 source $GANMAT/functions/registration.sh $GANMAT $input_dir $output_dir $threads input
