@@ -20,9 +20,11 @@
 ####################################################################################################
 
 # Import packages
+import warnings
 import numpy as np
 import scipy.special
 import scipy.stats
+warnings.filterwarnings("ignore", category=RuntimeWarning)
 
 def build_mpc(data, parc=None, idxExclude=None):
     # If no parcellation is provided, MPC will be computed vertexwise

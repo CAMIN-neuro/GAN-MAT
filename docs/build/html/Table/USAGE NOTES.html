@@ -1,22 +1,23 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>USAGE NOTES &mdash; GAN-MAT 1.0.0 documentation</title>
-      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=af2ce170"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -29,11 +30,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> GAN-MAT
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            GAN-MAT
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -64,7 +69,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a></li>
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
       <li class="breadcrumb-item active">USAGE NOTES</li>
       <li class="wy-breadcrumbs-aside">
               <a href="https://github.com/CAMIN-neuro/GAN-MAT/blob/main/docs/source/Table/USAGE NOTES.rst" class="fa fa-github"> Edit on GitHub</a>
@@ -80,18 +85,20 @@
 <section id="gan-mat-structure">
 <h2>GAN-MAT structure<a class="headerlink" href="#gan-mat-structure" title="Permalink to this heading"></a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>GAN-MAT
+├── docs
 ├── functions
 │   └── model
 ├── parcellations
 ├── template
 ├── folder_setting.ipynb
-└── gan-mat
+├── gan-mat
+└── README.md
 </pre></div>
 </div>
 <ul class="simple">
-<li><p><strong>functions</strong>: : A folder containing (i) the GAN model (functions/model) to synthesize the T2-weighted MRI from the T1-weighted MRI, and (ii) necessary scripts to calculate myelin-sensitive proxy (T1w/T2w ratio) and (iii) to generate microstructural profile covariance (MPC) and its gradient.</p></li>
+<li><p><strong>functions</strong>: : A folder containing (i) the GAN model (functions/model) to synthesize the T2-weighted MRI from the T1-weighted MRI, and (ii) necessary scripts to calculate myelin-sensitive proxy (T1w/T2w ratio) and (iii) to generate microstructural profile covariance (MPC) matrix, microstructural gradients, and moment features.</p></li>
 <li><p><strong>parcellations</strong>: A folder containing 18 different atlases: aparc, aparc-a2009s, economo, glasser-360, schaefer-100~1000, vosdewael-100~400.</p></li>
-<li><p><strong>template</strong>: A folder containing the MNI 0.7mm T1 template for initial registration.</p></li>
+<li><p><strong>template</strong>: A folder containing the MNI 0.8mm T1 template for initial registration.</p></li>
 <li><p><strong>folder_setting.ipynb</strong>: A file converting input data to an appropriate format to run the pipeline.</p></li>
 <li><p><strong>gan-mat</strong>: A main script to run GAN-MAT.</p></li>
 </ul>
@@ -102,48 +109,34 @@
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>input_dir
 ├── 105923                                        # Subject ID
 │   └── T1w
-│       ├── 105923                                # Subject ID
-│       │   ├── anat
-│       │   │   └── surfaces
-│       │   │       └── micro_profiles
-│       │   ├── label                             # freesurfer output
-│       │   │   ├── lh.cortex.label
-│       │   │   └── rh.cortex.label
-│       │   ├── mri                               # freesurfer output
-│       │   │   ├── orig.mgz
-│       │   │   ├── brainmask.mgz
-│       │   │   └── orig
-│       │   │       └── 001.mgz
-│       │   └── surf                              # freesurfer output
-│       │       ├── lh.area
-│       │       ├── lh.area.pial
-│       │       ├── lh.pial
-│       │       ├── lh.sphere.reg
-│       │       ├── lh.thickness
-│       │       ├── lh.white
-│       │       ├── rh.area
-│       │       ├── rh.area.pial
-│       │       ├── rh.pial
-│       │       ├── rh.sphere.reg
-│       │       ├── rh.thickness
-│       │       └── rh.white
-│       └── T1w.nii.gz                            # input T1-weighted MRI
+│       └─── 105923                                # Subject ID
+│           ├── anat
+│           │   └── surfaces
+│           │       └── micro_profiles
+│           ├── label                             # freesurfer output
+│           │   ├── lh.cortex.label
+│           │   └── rh.cortex.label
+│           ├── mri                               # freesurfer output
+│           │   └── orig.mgz
+│           └── surf                              # freesurfer output
+│               ├── lh.area
+│               ├── lh.area.pial
+│               ├── lh.pial
+│               ├── lh.sphere.reg
+│               ├── lh.white
+│               ├── rh.area
+│               ├── rh.area.pial
+│               ├── rh.pial
+│               ├── rh.sphere.reg
+│               └── rh.white
 └── ...
 </pre></div>
-</div>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Use not bias field corrected T1-weighted image (T1w.nii.gz).</p>
 </div>
 <p><strong>2. Run</strong> <em>gan-mat</em>.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gan</span><span class="o">-</span><span class="n">mat</span> <span class="o">-</span><span class="n">input_dir</span> <span class="o">/</span><span class="n">INPUT</span><span class="o">/</span><span class="n">DATA</span><span class="o">/</span><span class="n">PATH</span> <span class="o">-</span><span class="n">output_dir</span> <span class="o">/</span><span class="n">OUTPUT</span><span class="o">/</span><span class="n">PATH</span> <span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
-<colgroup>
-<col style="width: 17%" />
-<col style="width: 83%" />
-</colgroup>
 <tbody>
 <tr class="row-odd"><td><p><strong>Options</strong></p></td>
 <td><p><strong>Description</strong></p></td>
@@ -177,7 +170,7 @@
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>If the batch size is one, more than 10GB of GPU memory is required. In the case of low GPU capacity, change the <strong>device</strong> variable in the <em>~/GAN-MAT/functions/model/t2.py</em>.</p>
+<p>The 10GB of GPU memory is required. In the case of low GPU capacity, change the <strong>device</strong> variable in the <em>~/GAN-MAT/functions/model/t2.py</em>.</p>
 </div>
 </section>
 </section>

@@ -12,7 +12,10 @@ class DECBR3d(nn.Module):
                                       bias=bias)]
 
         if not norm is None:
-            layers += [nn.BatchNorm3d(num_features=out_channels)]
+            if norm == "bnorm":
+                layers += [nn.BatchNorm3d(num_features=out_channels)]
+            elif norm == "inorm":
+                layers += [nn.InstanceNorm3d(num_features=out_channels)]
 
         if not relu is None and relu >= 0.0:
             layers += [nn.ReLU() if relu == 0 else nn.LeakyReLU(relu)]
@@ -33,7 +36,10 @@ class CBR3d(nn.Module):
                              bias=bias)]
 
         if not norm is None:
-            layers += [nn.BatchNorm3d(num_features=out_channels)]
+            if norm == "bnorm":
+                layers += [nn.BatchNorm3d(num_features=out_channels)]
+            elif norm == "inorm":
+                layers += [nn.InstanceNorm3d(num_features=out_channels)]
 
         if not relu is None and relu >= 0.0:
             layers += [nn.ReLU() if relu == 0 else nn.LeakyReLU(relu)]
@@ -137,5 +143,5 @@ class Pix2Pix_3D(nn.Module):
         dec8 = self.dec8(cat8)
 
         x = torch.tanh(dec8)
-
         return x
+

@@ -16,13 +16,10 @@ parser.add_argument("--output_dir")
 parser.add_argument("--make_dir", default=False)
 parser.add_argument("--make_sub_list", default=False)
 parser.add_argument("--resize", default=False)
-parser.add_argument("--myelin_brain", default=False)
+parser.add_argument("--resize_inv", default=False)
 parser.add_argument("--matrix", default=False)
-parser.add_argument("--save_matrix", default=False)
 parser.add_argument("--gradients", default=False)
-parser.add_argument("--save_gradients", default=False)
 parser.add_argument("--moment", default=False)
-parser.add_argument("--moment_save", default=False)
 args = parser.parse_args()
 
 GANMAT = args.GANMAT
@@ -32,13 +29,10 @@ output_dir = args.output_dir
 make_dir = args.make_dir
 make_sub_list = args.make_sub_list
 resize = args.resize
-myelin_brain = args.myelin_brain
+resize_inv = args.resize_inv
 matrix = args.matrix
-save_matrix = args.save_matrix
 gradients = args.gradients
-save_gradients = args.save_gradients
 moment = args.moment
-moment_save = args.moment_save
 
 if make_sub_list:
     sub_list = os.listdir(input_dir)
@@ -57,25 +51,30 @@ if make_dir:
 
 if resize:
     for sub in sub_list:
-        t1 = nib.load(input_dir + '/{}/T1w_regi.nii.gz'.format(sub)).get_fdata()
-        t1 = t1[2:-2, 11:304, :-4]
-        t1 = transform.resize(t1, (256, 256, 256))
-        t1 = t1 / t1.max()
+        img = np.zeros((256, 256, 256, 3))
+        temp = np.zeros((227, 272, 227, 3))
 
-        nib.save(nib.Nifti1Image(t1, None), input_dir + '/{}/input_T1w.nii.gz'.format(sub))    
+        t1 = nib.load(input_dir + "/{}/T1w_MNI.nii.gz".format(sub)).get_fdata()
+        pve = nib.load(input_dir + "/{}/T1w_MNI_pveseg.nii.gz".format(sub)).get_fdata()
 
-if myelin_brain:
+        for i in range(1, 4):
+            x, y, z = np.where(pve == i); temp[x, y, z, i-1] = t1[x, y, z]
+
+        img[14:-15, : ,14:-15, :] = temp[:, 8:-8, :, :]
+        np.save(input_dir + '/{}/T1w_MNI_pveseg.npy'.format(sub), img)
+
+if resize_inv:
     for sub in sub_list:
-        myelin = nib.load(input_dir + "/{}/myelin.nii.gz".format(sub)).get_fdata()    
-        mask = nib.load(input_dir + "/{}/input_T1w_brain_mask.nii.gz".format(sub)).get_fdata()  
-    
-        myelin = np.array(myelin).reshape(-1)
-        mask = np.array(mask).reshape(-1)    
-    
-        myelin[np.where(mask==0)] = 0
-        myelin = myelin.reshape(256, 256, 256)
+        MNI_header = nib.load(GANMAT+ "/template/MNI152_T1_0.8mm_brain.nii.gz").header
+        img = np.zeros((227, 272, 227))
 
-        nib.save(nib.Nifti1Image(myelin, None), input_dir + "/{}/myelin_brain.nii.gz".format(sub))
+        t2 = np.load(input_dir + '/{}/output_T2w.npy'.format(sub))
+        t2 = (t2 - t2.min()) / (t2.max() - t2.min())
+
+        img[:, 8:-8, :] = t2[14:-15, :, 14:-15]
+        nifti_img = nib.Nifti1Image(img, affine=None, header=MNI_header)
+
+        nib.save(nifti_img, input_dir + '/{}/output_MNI.nii.gz'.format(sub))
 
 if matrix:
     f = open(GANMAT + "/parcellations/atlas_list.txt", 'r')
@@ -97,22 +96,9 @@ if matrix:
             MPC = np.delete(np.delete(MPC, idx, axis=0), idx, axis=1)
 
             np.savetxt(input_dir + "/{}/T1w/{}/anat/surfaces/micro_profiles/{}_MPC_matrix.txt".format(sub, sub, atlas), MPC)
-
-        print("Make sub-{} matrix".format(sub))
-
-if save_matrix:
-    f = open(GANMAT + "/parcellations/atlas_list.txt", 'r')
-    atlas_ls = f.read()
-    atlas_ls = atlas_ls.split("\n")[:-1]
-    
-    for sub in sub_list:
-        for atlas in atlas_ls:
-            atlas = atlas.split('.')[0].split("_")[0]
-
             shutil.copy(input_dir + "/{}/T1w/{}/anat/surfaces/micro_profiles/{}_MPC_matrix.txt".format(sub, sub, atlas), output_dir + "/{}/{}_MPC_matrix.txt".format(sub, atlas))
 
-        print("Save sub-{} matrix".format(sub))
-
+        print("Make sub-{} matrix".format(sub))
 
 if gradients:
     f = open(GANMAT + "/parcellations/atlas_list.txt", 'r')
@@ -141,21 +127,9 @@ if gradients:
             
             ## save gradients
             np.savetxt(input_dir + "/{}/T1w/{}/anat/surfaces/micro_profiles/{}_MPC_gradients.txt".format(sub, sub, atlas), grads)
+            shutil.copy(input_dir + "/{}/T1w/{}/anat/surfaces/micro_profiles/{}_MPC_gradients.txt".format(sub, sub, atlas), output_dir + "/{}/{}_MPC_gradients.txt".format(sub, atlas))
 
         print("Make sub-{} gradients".format(sub))
-
-if save_gradients:
-    f = open(GANMAT + "/parcellations/atlas_list.txt", 'r')
-    atlas_ls = f.read()
-    atlas_ls = atlas_ls.split("\n")[:-1]
-
-    for sub in sub_list:
-        for atlas in atlas_ls:
-            atlas = atlas.split('.')[0].split("_")[0]
-
-            shutil.copy(input_dir + "/{}/T1w/{}/anat/surfaces/micro_profiles/{}_MPC_gradients.txt".format(sub, sub, atlas), output_dir + "/{}/{}_MPC_gradients.txt".format(sub, atlas))
-            
-        print("Save sub-{} gradients".format(sub))
             
 if moment:
     f = open(GANMAT + "/parcellations/atlas_list.txt", 'r')
@@ -183,18 +157,8 @@ if moment:
 
             # save momnet
             np.savetxt(input_dir + "/{}/T1w/{}/anat/surfaces/micro_profiles/{}_moment.txt".format(sub, sub, atlas), moment)
+            shutil.copy(input_dir + "/{}/T1w/{}/anat/surfaces/micro_profiles/{}_moment.txt".format(sub, sub, atlas), output_dir + "/{}/{}_MPC_moment.txt".format(sub, atlas))
             
         print("Make sub-{} moment".format(sub))
 
-if moment_save:
-    f = open(GANMAT + "/parcellations/atlas_list.txt", 'r')
-    atlas_ls = f.read()
-    atlas_ls = atlas_ls.split("\n")[:-1]
 
-    for sub in sub_list:
-        for atlas in atlas_ls:
-            atlas = atlas.split('.')[0].split("_")[0]
-
-            shutil.copy(input_dir + "/{}/T1w/{}/anat/surfaces/micro_profiles/{}_moment.txt".format(sub, sub, atlas), output_dir + "/{}/{}_MPC_moment.txt".format(sub, atlas))
-            
-        print("Save sub-{} moment".format(sub))

@@ -5,7 +5,6 @@ export PYTHONDONTWRITEBYTECODE=1
 ## initionaliztion variables
 input_dir=None
 output_dir=None
-batch_size=1
 threads=6
 T2=None
 myelin=None
@@ -25,11 +24,6 @@ do
 
   -output_dir)
     output_dir=$2
-    shift;shift
-  ;;
-
-  -batch_size)
-    batch_size=$2
     shift;shift
   ;;
 
@@ -92,7 +86,6 @@ if [ ! -d $output_dir ];  then
         exit
 fi
 
-
 atlas_list=$(<$GANMAT/parcellations/atlas_list.txt)
 
 ## make sub list
@@ -101,92 +94,56 @@ python $GANMAT/functions/preprocessing.py --GANMAT=$GANMAT --input_dir=$input_di
 
 sub_list=$(<$output_dir/sub_list.txt)
 
-## bias-field correction for registration
-source $GANMAT/functions/registration.sh $GANMAT $input_dir $output_dir $threads bias
+## making freesurfer space T1w
+source $GANMAT/functions/preprocessing.sh $GANMAT $input_dir $output_dir $threads fs
 
-## T1 registrate to MNI152_T1_0.7mm.nii.gz
-source $GANMAT/functions/registration.sh $GANMAT $input_dir $output_dir $threads input
+## T1 registrate to MNI152_0.8
+source $GANMAT/functions/preprocessing.sh $GANMAT $input_dir $output_dir $threads t1
 
-## making input image
+## making T2 images
 python $GANMAT/functions/preprocessing.py --GANMAT=$GANMAT --input_dir=$input_dir --output_dir=$output_dir --resize=TRUE
-
-## making T2 image
-python $GANMAT/functions/model/main.py --pipeline_dir=$GANMAT --input_dir=$input_dir --batch_size=$batch_size
+python $GANMAT/functions/model/main.py --pipeline_dir=$GANMAT --input_dir=$input_dir --batch_size=1 --output_dir=$output_dir
+python $GANMAT/functions/preprocessing.py --GANMAT=$GANMAT --input_dir=$input_dir --output_dir=$output_dir --resize_inv=TRUE
 
 ##### T2
-if [ $T2 == TRUE ] || [ $all == TRUE ]; then
-	source $GANMAT/functions/registration.sh $GANMAT $input_dir $output_dir $threads t2
+source $GANMAT/functions/preprocessing.sh $GANMAT $input_dir $output_dir $threads t2
 
-	if [ $T2 == TRUE ]; then
-		exit
-	fi
+if [ $T2 == TRUE ]; then
+	exit
 fi
 ######################################################################################
 
-## making myelin image
-source $GANMAT/functions/myelin.sh $GANMAT $input_dir $output_dir $threads 
-
 ##### myelin
-if [ $myelin == TRUE ] || [ $all == TRUE ]; then
-        for sub in $sub_list
-	do
-		cp $input_dir/$sub/T1w/myelin_brain_regi.nii.gz $output_dir/$sub/myelin.nii.gz 
-	done
-	if [ $myelin == TRUE ]; then
-		exit
-	fi
+source $GANMAT/functions/preprocessing.sh $GANMAT $input_dir $output_dir $threads myelin
+
+if [ $myelin == TRUE ]; then
+	exit
 fi
 #######################################################################################
 
-## MPC surface
-for sub in $sub_list
-do
-	source $GANMAT/functions/MPC_surf.sh $sub $input_dir
-done
+# make microstructural intensity
+source $GANMAT/functions/preprocessing.sh $GANMAT $input_dir $output_dir $threads MPC
 
-## MPC upper matrix
-for sub in $sub_list
-do
-	for atlas in $atlas_list
-	do
-		source $GANMAT/functions/MPC_txt.sh $sub $input_dir $atlas
-	done
-done
-
-## make MPC matrix
+##### MPC matrix
 python $GANMAT/functions/preprocessing.py --GANMAT=$GANMAT --input_dir=$input_dir --output_dir=$output_dir --matrix=TRUE
 
-
-##### matrix
-if [ $matrix == TRUE ] || [ $all == TRUE ]; then
-	python $GANMAT/functions/preprocessing.py --GANMAT=$GANMAT --input_dir=$input_dir --output_dir=$output_dir --save_matrix=TRUE
-	if [ $matrix == TRUE ]; then
-		exit
-	fi
+if [ $matrix == TRUE ]; then
+	exit
 fi
 #######################################################################################
-
-python $GANMAT/functions/preprocessing.py --GANMAT=$GANMAT --input_dir=$input_dir --output_dir=$output_dir --gradients=TRUE
-
 
 ##### gradients
-if [ $gradients == TRUE ] || [ $all == TRUE ]; then
-        python $GANMAT/functions/preprocessing.py --GANMAT=$GANMAT --input_dir=$input_dir --output_dir=$output_dir --save_gradients=TRUE
-        
-	if [ $gradients == TRUE ]; then
-		exit
-	fi
+python $GANMAT/functions/preprocessing.py --GANMAT=$GANMAT --input_dir=$input_dir --output_dir=$output_dir --gradients=TRUE
+
+if [ $gradients == TRUE ]; then
+	exit
 fi
 #######################################################################################
 
+##### moments
 python $GANMAT/functions/preprocessing.py --GANMAT=$GANMAT --input_dir=$input_dir --output_dir=$output_dir --moment=TRUE
 
-##### momnet
-if [ $moment == TRUE ] || [ $all == TRUE ]; then
-        python $GANMAT/functions/preprocessing.py --GANMAT=$GANMAT --input_dir=$input_dir --output_dir=$output_dir --moment_save=TRUE
-
-        if [ $moment == TRUE ]; then
-                exit
-        fi
+if [ $moment == TRUE ]; then
+	exit
 fi
 #######################################################################################

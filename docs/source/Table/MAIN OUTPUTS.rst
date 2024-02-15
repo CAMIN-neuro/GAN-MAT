@@ -13,7 +13,7 @@ Output data structure
    output_dir
    ├── 105923                                   # Subject ID
    │   ├── T2w.nii.gz                           # Synthesized T2-weighted MRI
-   │   ├── microstructure.nii.gz                # Synthesized microstructure-sensitive proxy
+   │   ├── myelin.nii.gz                        # Synthesized microstructure-sensitive proxy
    │   ├── schaefer-100_MPC_matrix.txt          # MPC matrix with schaefer-100 atlas
    │   ├── schaefer-200_MPC_matrix.txt          # MPC matrix with schaefer-200 atlas
    │   ├── schaefer-300_MPC_matrix.txt          # MPC matrix with schaefer-300 atlas
