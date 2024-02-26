@@ -20,9 +20,9 @@ Paper: *XX*
 * Chae Yeon Kim, CAMIN Lab - Inha University
 * Jong Young Namgung, CAMIN Lab - Inha University
 * Yunseo Park, CAMIN Lab - Inha University
-* Hyunjin Park, MIPL - Sungkyunkwan University
+* Hyunjin Park, MIP Lab - Sungkyunkwan University
 * Eunjung Lee, Poderosa
-* Yeodong Yun, Poderosa
+* Yeo Dong Yoon, Poderosa
 * Casey Paquola, Multiscale Neuroanatomy Lab - INM-1 at Forschungzentrum Juelich
 * Boris Bernhardt, MICA Lab - Montreal Neurological Institute
 

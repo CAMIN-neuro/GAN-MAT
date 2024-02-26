@@ -33,7 +33,7 @@ Installation
 
 **2. Download the model at the link below:**
    
-`link`_
+`https://www.dropbox.com/sh/nnzayieuizd012y/AACLSwUY9BBTCdf66_nWqK02a?dl=0 <https://www.dropbox.com/sh/nnzayieuizd012y/AACLSwUY9BBTCdf66_nWqK02a?dl=0>`_
 
 **3. Move the downloaded model to the GAN-MAT folder:**
    
