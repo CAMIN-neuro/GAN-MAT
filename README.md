@@ -1,5 +1,5 @@
 # GAN-MAT
-<p align="center"><img width="80%" src="https://camin-neuro.github.io/GAN-MAT/build/html/_images/figure.png"/>
+<p align="center"><img width="80%" src="https://camin-neuro.github.io/GAN-MAT/build/html/_images/figure.jpg"/>
 
 ## Generative Adversarial Network-based Microstructural profile covariance Analysis Toolbox
 
