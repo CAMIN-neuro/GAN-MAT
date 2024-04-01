@@ -20,7 +20,7 @@ Paper: [GAN-MAT: Generative Adversarial Network-based Microstructural Profile Co
 * Chae Yeon Kim, CAMIN Lab - Inha University
 * Jong Young Namgung, CAMIN Lab - Inha University
 * Yunseo Park, CAMIN Lab - Inha University
-* Hyunjin Park, MIPL - Sungkyunkwan University
+* Hyunjin Park, MIP lab - Sungkyunkwan University
 * Eunjung Lee, Poderosa
 * Yeodong Yun, Poderosa
 * Casey Paquola, Multiscale Neuroanatomy Lab - INM-1 at Forschungzentrum Juelich
