@@ -1,5 +1,5 @@
 # GAN-MAT
-<p align="center"><img width="80%" src="https://camin-neuro.github.io/GAN-MAT/build/html/_images/figure.jpg"/>
+<p align="center"><img width="80%" src="https://camin-neuro.github.io/GAN-MAT/build/html/_images/figure.png"/>
 
 ## Generative Adversarial Network-based Microstructural profile covariance Analysis Toolbox
 
@@ -8,7 +8,7 @@ GAN-MAT is a comprehensive framework to study brain microstructure in vivo using
 # Documentation
 Check out [ONLINE DOCUMENTATION PAGE](https://camin-neuro.github.io/GAN-MAT/build/html/index.html) for installation and usages.
 
-Paper: *XX*
+Paper: [GAN-MAT: Generative Adversarial Network-based Microstructural Profile Covariance Analysis Toolbox](https://doi.org/10.1016/j.neuroimage.2024.120595)
 
 # Core developers
 * Yeongjun Park, MIP Lab - Sungkyunkwan University
@@ -20,9 +20,9 @@ Paper: *XX*
 * Chae Yeon Kim, CAMIN Lab - Inha University
 * Jong Young Namgung, CAMIN Lab - Inha University
 * Yunseo Park, CAMIN Lab - Inha University
-* Hyunjin Park, MIP Lab - Sungkyunkwan University
+* Hyunjin Park, MIPL - Sungkyunkwan University
 * Eunjung Lee, Poderosa
-* Yeo Dong Yoon, Poderosa
+* Yeodong Yun, Poderosa
 * Casey Paquola, Multiscale Neuroanatomy Lab - INM-1 at Forschungzentrum Juelich
 * Boris Bernhardt, MICA Lab - Montreal Neurological Institute
 

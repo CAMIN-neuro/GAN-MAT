@@ -7,7 +7,7 @@ Citing GAN-MAT
 
 If you use GAN-MAT for your project, please cite the following:
 
-`Will be updated upon publication. <https://temp>`_
+`GAN-MAT: Generative Adversarial Network-based Microstructural Profile Covariance Analysis Toolbox. <https://doi.org/10.1016/j.neuroimage.2024.120595>`_
 
 References
 ==========

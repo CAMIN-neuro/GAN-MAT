@@ -2,6 +2,9 @@
 USAGE NOTES
 -----------
 
+.. note::
+   - We recommand to run freesurfer first, becuase all files we need are freesurfer output files.
+
 GAN-MAT structure 
 ========================
 
@@ -33,7 +36,7 @@ Run GAN-MAT
    input_dir
    ├── 105923                                        # Subject ID
    │   └── T1w
-   │       └─── 105923                                # Subject ID
+   │       └─── 105923                               # Subject ID
    │           ├── anat
    │           │   └── surfaces
    │           │       └── micro_profiles
