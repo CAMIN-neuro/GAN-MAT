@@ -11,18 +11,18 @@ Check out [ONLINE DOCUMENTATION PAGE](https://camin-neuro.github.io/GAN-MAT/buil
 Paper: [GAN-MAT: Generative Adversarial Network-based Microstructural Profile Covariance Analysis Toolbox](https://doi.org/10.1016/j.neuroimage.2024.120595)
 
 # Core developers
-* Yeongjun Park, MIP Lab - Sungkyunkwan University
-* Bo-yong Park, CAMIN Lab - Inha University
+* Yeongjun Park
+* Bo-yong Park
 
 ## & the team
-* Mi Ji Lee, Seoul National University Hospital
-* Seulki Yoo, CAMIN Lab - Inha University
-* Chae Yeon Kim, CAMIN Lab - Inha University
-* Jong Young Namgung, CAMIN Lab - Inha University
-* Yunseo Park, CAMIN Lab - Inha University
-* Hyunjin Park, MIP lab - Sungkyunkwan University
-* Eunjung Lee, Poderosa
-* Yeodong Yun, Poderosa
-* Casey Paquola, Multiscale Neuroanatomy Lab - INM-1 at Forschungzentrum Juelich
-* Boris Bernhardt, MICA Lab - Montreal Neurological Institute
+* Mi Ji Lee
+* Seulki Yoo
+* Chae Yeon Kim
+* Jong Young Namgung
+* Yunseo Park
+* Hyunjin Park
+* Eunjung Lee
+* Yeodong Yun
+* Casey Paquola
+* Boris Bernhardt
 
