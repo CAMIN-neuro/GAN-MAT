@@ -8,7 +8,7 @@ task=$5
 sub_list=$(<$output_dir/sub_list.txt)
 
 if [ $task == fs ]; then
-	{
+	if command -v parallel > /dev/null 2>&1; then
 		# raw data
 		parallel -j $threads mri_convert $input_dir/{}/T1w/{}/mri/orig.mgz $input_dir/{}/raw.nii.gz ::: $sub_list
 
@@ -26,9 +26,7 @@ if [ $task == fs ]; then
 			rm -rf $input_dir/$sub/raw.nii.gz
 			rm -rf $input_dir/$sub/T1w_fsnative.nii.gz
 		done
-
-
-	} || {
+	else
 		for sub in $sub_list
 		do
 			mri_convert $input_dir/$sub/T1w/$sub/mri/orig.mgz $input_dir/$sub/raw.nii.gz
@@ -39,7 +37,7 @@ if [ $task == fs ]; then
                         rm -rf $input_dir/$sub/raw.nii.gz			
 			rm -rf $input_dir/$sub/T1w_fsnative.nii.gz
 		done
-	}
+	fi
 fi
 	
 if [ $task == t1 ]; then
@@ -54,14 +52,14 @@ if [ $task == t1 ]; then
 	# brain_segmentation
 	echo "tissue segmentation using FSL FAST"
 
-	{
+	if command -v parallel > /dev/null 2>&1; then
 		parallel -j $threads $FSL_DIR/bin/fast -N $input_dir/{}/T1w_MNI.nii.gz ::: $sub_list
-	} || {
+	else
 		for sub in $sub_list
         	do
 			$FSL_DIR/bin/fast -N $input_dir/$sub/T1w_MNI.nii.gz
 		done
-	}
+	fi
 
 	for sub in $sub_list
 	do
@@ -109,12 +107,12 @@ if [ $task == myelin ]; then
 fi
 
 if [ $task == MPC ]; then
-	{
+	if command -v parallel > /dev/null 2>&1; then
 		parallel -j $threads $GANMAT/functions/MPC.sh {} $input_dir ::: $sub_list
-	} || {
+	else
 		for sub in $sub_list
 		do
 		        source $GANMAT/functions/MPC.sh $sub $input_dir
 		done
-	}
+	fi
 fi
