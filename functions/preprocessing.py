@@ -6,7 +6,6 @@ import nibabel as nib
 from scipy.stats import skew, kurtosis
 
 from brainspace.gradient import GradientMaps
-from skimage import transform
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--GANMAT")

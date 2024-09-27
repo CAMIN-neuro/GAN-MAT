@@ -10,16 +10,16 @@ Dependencies & Python packages
 .. code-block::
 
    FSL v.6.0
-   FreeSurfer v.6.0.0
+   FreeSurfer v.7.3.2
+   AFNI v.22.1.14
+   ANTs v.2.3.5
    Workbench v.1.5.0
    GNU Parallel
-   brainspace == 0.1.4
-   numpy >= 1.18.5 & numpy <= 1.25.0
-   scipy >= 1.4.1 & scipy <= 1.9.1
-   nibabel == 4.0.2
-   torch == 1.12
-   torchvision == 0.13.1
-   scikit-image == 0.19.3
+   brainspace == 0.1.10
+   numpy == 1.24.4
+   scipy == 1.9.3
+   nibabel == 5.2.0
+   torch == 2.1.2
    tqdm
 
 Installation
@@ -33,7 +33,8 @@ Installation
 
 **2. Download the model at the link below:**
    
-`link`_
+`<https://www.dropbox.com/sh/nnzayieuizd012y/AACLSwUY9BBTCdf66_nWqK02a?dl=0>`_
+
 
 **3. Move the downloaded model to the GAN-MAT folder:**
    
